@@ -402,9 +402,6 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
           <button class="refresh-btn" id="refreshBtn" title="جلب أحدث البيانات من Google Sheets">
             <span id="refresh-ico">🔄</span> تحديث البيانات
           </button>
-          <button class="refresh-btn ghost" id="editBtn" title="تعديل محلي / تصدير">
-            <span>✏️</span> تعديل
-          </button>
         </div>
       </div>
     </div>
@@ -429,12 +426,12 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
           <canvas id="gaugeOverall" width="280" height="200"></canvas>
           <div class="gauge-value">
             <div class="big" id="gaugeBig">—</div>
-            <div class="lbl">مهام مكتملة من ٧</div>
+            <div class="lbl">مراحل مكتملة من ٧</div>
           </div>
         </div>
       </div>
       <div class="card">
-        <h3>حالة المهام <span class="en">Task Status</span></h3>
+        <h3>حالة المراحل <span class="en">Phase Status</span></h3>
         <div style="height:200px"><canvas id="ragDonut"></canvas></div>
       </div>
       <div class="card" style="background:linear-gradient(135deg,#fffbf0 0%,#fff 100%);border:1px solid #f4e6c2" id="currentPhaseCard"></div>
@@ -442,7 +439,7 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
 
     <div class="grid-2-1" style="margin-top:14px">
       <div class="card">
-        <h3>تقدّم المهام والمعالم <span class="en">Task Progress</span></h3>
+        <h3>تقدّم المراحل والمعالم <span class="en">Phase Progress</span></h3>
         <div id="phaseBars"></div>
       </div>
       <div class="card">
@@ -457,7 +454,7 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
   <!-- ========== PAGE 2: PHASES ========== -->
   <section class="page" id="page-phases">
     <div class="card">
-      <h3>الجدول الزمني للمهام والمعالم <span class="en">Tasks &amp; Milestones Timeline</span> <span class="pill" id="phaseCountPill">— مهمة</span></h3>
+      <h3>الجدول الزمني للمراحل والمعالم <span class="en">Phases &amp; Milestones Timeline</span> <span class="pill" id="phaseCountPill">— مرحلة</span></h3>
       <div class="gantt-header">
         <div>المرحلة / Phase</div>
         <div id="ganttScale"></div>
@@ -472,12 +469,12 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
       </div>
     </div>
 
-    <div class="section-title">تفاصيل المهام والمعالم <span class="en">Task &amp; Milestone Details</span></div>
+    <div class="section-title">تفاصيل المراحل والمعالم <span class="en">Phase &amp; Milestone Details</span></div>
     <div class="card" style="padding:6px">
       <div class="tbl-wrap">
         <table>
           <thead>
-            <tr><th>#</th><th>المهمة / المعلم</th><th>البداية</th><th>النهاية المخطط</th>
+            <tr><th>#</th><th>المرحلة / المعلم</th><th>البداية</th><th>النهاية المخطط</th>
               <th>المدة</th><th>الحالة</th><th>المؤشر</th><th>ملاحظات</th></tr>
           </thead>
           <tbody id="phaseTable"></tbody>
@@ -495,7 +492,7 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
 
     <div class="grid-2" style="margin-top:14px">
       <div class="card">
-        <h3>مدة كل مهمة <span class="en">Task Duration (days)</span></h3>
+        <h3>مدة كل مرحلة <span class="en">Phase Duration (days)</span></h3>
         <div style="height:240px"><canvas id="phaseDurChart"></canvas></div>
       </div>
       <div class="card">
@@ -578,60 +575,10 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
 
   <div class="footer">
     <b>لوحة متابعة مشروع كوشان كلود الذكاء الاصطناعي ٢٫٠</b> • شركة كوشان •
-    البيانات مُضمَّنة داخل هذا الملف — تُعدّل من زر «تعديل البيانات»
+    البيانات مُضمَّنة داخل هذا الملف
     <br><span class="en">Confidential • For Senior Management Review Only • Single-file dashboard • GitHub Pages</span>
   </div>
 </div>
-
-<!-- =================== EDIT DRAWER =================== -->
-<div class="ed-back" id="edBack"></div>
-<aside class="ed" id="ed">
-  <div class="ed-top">
-    <div>
-      <b>تعديل بيانات اللوحة <span class="ed-dirty" id="edDirty">تغييرات لم تُصدَّر</span></b>
-      <small class="en">Edit dashboard data — apply, then export to publish</small>
-    </div>
-    <button class="ed-x" id="edClose" title="إغلاق (Esc)" aria-label="إغلاق">✕</button>
-  </div>
-
-  <div class="ed-save">
-    <b>كيف تُحفظ التعديلات؟</b>
-    <span class="step sheeton">✅ <b>الورقة متصلة.</b> عدّل في Google Sheets ثم اضغط «تحديث البيانات» — يظهر التغيير للجميع فوراً دون رفع أي ملف. الإصدارات: File ← Version history.</span>
-    <span class="step sheeton" style="color:#8a6d1f">التعديل من هذه النافذة محلي ومؤقت فقط، وسيُستبدل عند التحديث التالي. المصدر الرسمي هو الورقة.</span>
-    <span class="step sheetoff">١ · <b>تطبيق</b> — يعرض التغييرات فوراً ويحفظها في هذا المتصفح فقط.</span>
-    <span class="step sheetoff">٢ · <b>تصدير الملف</b> — ينزّل <code>index.html</code> محدّثاً لترفعه إلى GitHub.</span>
-    <span class="step sheetoff" style="color:#8a6d1f">للتحديث المباشر للجميع: اضبط <code>SHEET_ID</code> في أعلى ملف index.html.</span>
-  </div>
-
-  <nav class="ed-tabs" id="edTabs">
-    <button data-ed="phases" class="active">المهام</button>
-    <button data-ed="agents">الوكلاء</button>
-    <button data-ed="check">الجاهزية</button>
-    <button data-ed="lists">المخاطر والأنشطة</button>
-    <button data-ed="info">بيانات المشروع</button>
-    <button data-ed="json">JSON</button>
-  </nav>
-
-  <div class="ed-body">
-    <div class="ed-pane active" id="ed-phases"></div>
-    <div class="ed-pane" id="ed-agents"></div>
-    <div class="ed-pane" id="ed-check"></div>
-    <div class="ed-pane" id="ed-lists"></div>
-    <div class="ed-pane" id="ed-info"></div>
-    <div class="ed-pane" id="ed-json">
-      <p class="ed-hint">كل بيانات اللوحة كنص JSON. عدّل ثم اضغط «تطبيق».</p>
-      <textarea id="jsonBox" spellcheck="false"></textarea>
-      <div id="jsonErr" class="ed-err"></div>
-    </div>
-  </div>
-
-  <div class="ed-foot">
-    <button class="ed-btn primary" id="edApply">✓ تطبيق</button>
-    <button class="ed-btn export" id="edExport">⬇ تصدير الملف</button>
-    <button class="ed-btn" id="edReset">↺ استعادة الأصل</button>
-  </div>
-</aside>
-
 
 <script type="application/json" id="DASH_DATA">
 {
@@ -649,7 +596,7 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
     "startDate": "2026-07-06",
     "endDate": "2026-09-25",
     "duration": "١٢ أسبوعاً (تقديرية)",
-    "currentPhase": "",
+    "currentPhase": "بناء النماذج الأولية",
     "version": "v1.0",
     "lastUpdate": "2026-07-28",
     "endNote": "تاريخ الانتهاء تقديري ولم يُعتمد بعد"
@@ -657,11 +604,11 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
   "phases": [
     {
       "n": "M1",
-      "name": "انطلاق المشروع وتثبيت الفريق والأدوار",
+      "name": "اعتماد الانطلاق وبناء المشروع",
       "start": "2026-07-06",
       "end": "2026-07-06",
       "days": 1,
-      "status": "مكتملة",
+      "status": "قيد التنفيذ",
       "notes": ""
     },
     {
@@ -670,7 +617,7 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
       "start": "2026-07-07",
       "end": "2026-07-17",
       "days": 11,
-      "status": "مكتملة",
+      "status": "قيد التنفيذ",
       "notes": ""
     },
     {
@@ -971,24 +918,18 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
   "observations": [
     {
       "n": 1,
-      "obs": "لا تتوفّر حالياً أداة تُمكّن Claude من إرسال البريد عبر Outlook مباشرة",
-      "impact": "الخطوة الثانية في وكيل الحوكمة (المتابعة بالبريد) تظل غير مكتملة",
-      "action": "يُجرَّب حل بديل: ربط الوكيل بمتصفح Chrome والإرسال من Outlook عبره"
-    },
-    {
-      "n": 2,
-      "obs": "الحل البديل عبر Chrome و Outlook يعمل حالياً لكنه ليس حلاً دائماً",
-      "impact": "يتيح إتمام خطوة المتابعة، مع اعتماد على المتصفح بدل تكامل مباشر",
+      "obs": "لا تتوفّر حالياً أداة تُمكّن Claude من إرسال البريد عبر Outlook مباشرة؛ الحل البديل عبر Chrome و Outlook يعمل حالياً لكنه ليس حلاً دائماً",
+      "impact": "يتيح إتمام خطوة المتابعة في وكيل الحوكمة، مع اعتماد على المتصفح بدل تكامل مباشر",
       "action": "متابعة توفّر أداة إرسال مباشرة، وتقييم الحل البديل قبل التوسّع"
     },
     {
-      "n": 3,
+      "n": 2,
       "obs": "ينفّذ الأعضاء الثلاثة المشروع بالتوازي مع مهامهم الأساسية دون تفرّغ",
       "impact": "محدودية السرعة وتعرّض الجدول للتأخير",
       "action": "نطاق محدود لكل وكيل ومتابعة أسبوعية"
     },
     {
-      "n": 4,
+      "n": 3,
       "obs": "مستويا الطرح ٢ و٣ (تواصل الوكلاء ومنصة عرض المخرجات) غير محدَّدين بعد",
       "impact": "غياب وضوح في كيفية وصول الموظفين إلى مخرجات الوكلاء",
       "action": "حسمهما واعتمادهما مع الإدارة"
@@ -1054,7 +995,6 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
    HELPERS
    ════════════════════════════════════════════════════════ */
 const $ = (id) => document.getElementById(id);
-const DRAFT_KEY = "koushan_ai20_dashboard_draft";
 let D = null, CHARTS = {};
 
 const esc = s => String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1104,12 +1044,13 @@ function computeStats(D){
   const scored = readiness.filter(r=>r.assessed>0);
   const scoredN = scored.length;
   const avgReady = scored.length ? scored.reduce((s,r)=>s+r.pct,0)/scored.length : null;
+  const fullyReadyN = readiness.filter(r=>r.assessed>0 && r.pct===100).length;
 
   const active = ag.filter(a=>pctNum(a.pct)>0).length;
   const tasksDone = tasksDoneN;
 
   return {
-    overall, totDays, stageCount, readiness, avgReady,
+    overall, totDays, stageCount, readiness, avgReady, fullyReadyN,
     agentsTotal: ag.length, agentsActive: active,
     agentsLaunched: ag.filter(a=>String(a.stage||'').includes('مُعتمد')).length,
     agentsNotStarted: ag.filter(a=>pctNum(a.pct)===0).length,
@@ -1162,10 +1103,10 @@ function renderKPIs(){
     <div class="kpi amber">
       <div class="label">إجمالي التقدم <span class="en">Overall Progress</span></div>
       <div class="value">${s.overall===null?'—':s.overall.toFixed(1)+'<small>%</small>'}</div>
-      <div class="sub">${s.overall===null?'لم تُحدَّد حالات المهام بعد':s.tasksDone+' من '+D.phases.length+' مهام مكتملة'}</div>
+      <div class="sub">${s.overall===null?'لم تُحدَّد حالات المراحل بعد':s.tasksDone+' من '+D.phases.length+' مراحل مكتملة'}</div>
     </div>
     <div class="kpi green">
-      <div class="label">المهام المكتملة <span class="en">Tasks Complete</span></div>
+      <div class="label">المراحل المكتملة <span class="en">Phases Complete</span></div>
       <div class="value">${s.tasksDone}<small>/${D.phases.length}</small></div>
       <div class="sub">من M1 إلى M${D.phases.length}</div>
     </div>
@@ -1178,7 +1119,7 @@ function renderKPIs(){
       <div class="label">متوسط جاهزية الوكلاء <span class="en">Avg Readiness</span></div>
       <div class="value">${s.avgReady===null?'—':s.avgReady.toFixed(1)+'<small>%</small>'}</div>
       <div class="sub">${s.avgReady===null?'لم تُقيَّم الجاهزية بعد'
-        : 'من '+s.scoredN+' وكلاء مُقيَّمين من '+(D.checklist||[]).length+(s.blockedItems?' • '+s.blockedItems+' معوّق':'')}</div>
+        : s.fullyReadyN+' من '+(D.checklist||[]).length+' وكلاء جاهزون بالكامل'+(s.blockedItems?' • '+s.blockedItems+' معوّق':'')}</div>
     </div>
     <div class="kpi navy">
       <div class="label">الأنشطة المخططة <span class="en">Planned Activities</span></div>
@@ -1197,7 +1138,7 @@ function renderCurrentPhase(){
   const a = D.phases.find(p=>deriveRag(p.status,p.pct)==='amber') || D.phases.find(p=>!String(p.status||'').includes('مكتمل')) || D.phases[0] || {};
   const rag = deriveRag(a.status,a.pct);
   $('currentPhaseCard').innerHTML = `
-    <h3>المهمة الحالية <span class="en">Current Task</span>
+    <h3>المرحلة الحالية <span class="en">Current Phase</span>
       <span class="pill" style="background:var(--gold);color:var(--navy)">${esc(a.status||'—')}</span></h3>
     <div style="font-size:16px;font-weight:800;color:var(--navy);margin-bottom:6px">${esc(a.name||'—')}</div>
     <div style="font-size:12.5px;color:var(--muted);margin-bottom:14px">${a.owner? 'المسؤول: '+esc(a.owner):''}</div>
@@ -1266,7 +1207,7 @@ function renderScopeRow(){
 }
 
 function renderPhasesTable(){
-  $('phaseCountPill').textContent = D.phases.length + ' مهمة';
+  $('phaseCountPill').textContent = D.phases.length + ' مرحلة';
   $('phaseTable').innerHTML = D.phases.map(p=>{
     const rag=deriveRag(p.status,p.pct);
     return `<tr>
@@ -1318,7 +1259,7 @@ function renderAgentKpis(){
     <div class="kpi green"><div class="label">قيد الاختبار</div><div class="value">${s.agentsTesting}</div><div class="sub">على بيانات فعلية</div></div>
     <div class="kpi amber"><div class="label">قيد البناء</div><div class="value">${s.stageCount['قيد البناء']||0}</div><div class="sub">جارٍ التطوير</div></div>
     <div class="kpi red"><div class="label">بنود معوّقة</div><div class="value">${s.blockedItems}</div><div class="sub">في قوائم الجاهزية</div></div>
-    <div class="kpi" style="border-top-color:var(--gold)"><div class="label">متوسط الجاهزية</div><div class="value">${s.avgReady===null?'—':s.avgReady.toFixed(1)+'<small>%</small>'}</div><div class="sub">${s.avgReady===null?'لم تُقيَّم بعد':s.scoredN+' من '+(D.checklist||[]).length+' وكلاء مُقيَّمين'}</div></div>`;
+    <div class="kpi" style="border-top-color:var(--gold)"><div class="label">متوسط الجاهزية</div><div class="value">${s.avgReady===null?'—':s.avgReady.toFixed(1)+'<small>%</small>'}</div><div class="sub">${s.avgReady===null?'لم تُقيَّم بعد':s.fullyReadyN+' من '+(D.checklist||[]).length+' وكلاء جاهزون بالكامل'}</div></div>`;
 }
 
 function renderAgentCards(){
@@ -1611,158 +1552,7 @@ async function loadFromSheet(showToasts){
   }
 }
 
-/* ════════════════════════════════════════════════════════
-   EDIT DRAWER
-   ════════════════════════════════════════════════════════ */
-const OPEN = () => { $('ed').classList.add('open'); $('edBack').classList.add('show'); buildEditor(); };
-const CLOSE= () => { $('ed').classList.remove('open'); $('edBack').classList.remove('show'); };
 const setDirty = (on) => document.body.classList.toggle('dirty', !!on);
-
-function fld(label, path, val, type){
-  return `<label class="ed-f"><span>${esc(label)}</span>
-    <input type="${type||'text'}" data-path="${path}" value="${esc(val==null?'':val)}"></label>`;
-}
-function sel(label, path, val, opts){
-  return `<label class="ed-f"><span>${esc(label)}</span><select data-path="${path}">${
-    opts.map(o=>`<option value="${esc(o)}"${o===val?' selected':''}>${esc(o)}</option>`).join('')}</select></label>`;
-}
-
-function buildEditor(){
-  const STAT=['','لم تبدأ','قيد التنفيذ','مكتملة','متأخرة','ملغي'];
-  $('ed-phases').innerHTML = '<p class="ed-hint">الخلايا الفارغة تعني «لم تُزوَّد بعد» — لم تُخمَّن أي قيمة.</p>' +
-    D.phases.map((p,i)=>`<div class="ed-card"><div class="ed-card-t">${esc(p.n)} · ${esc(p.name)}</div>
-      ${fld('اسم المرحلة',`phases.${i}.name`,p.name)}
-      <div class="ed-2">${fld('البداية',`phases.${i}.start`,p.start,'date')}${fld('النهاية',`phases.${i}.end`,p.end,'date')}</div>
-      ${fld('المدة (يوم)',`phases.${i}.days`,p.days,'number')}
-      ${sel('الحالة',`phases.${i}.status`,p.status,STAT)}
-      ${fld('ملاحظات',`phases.${i}.notes`,p.notes)}
-    </div>`).join('');
-
-  const stages=(D.pipeline||[]).map(s=>s.stage);
-  $('ed-agents').innerHTML = '<p class="ed-hint">حدّث مرحلة كل وكيل ونسبة تقدّمه ومالكه.</p>' +
-    D.agents.map((a,i)=>`<div class="ed-card"><div class="ed-card-t">${a.n}. ${esc(a.name)}</div>
-      ${fld('الاسم',`agents.${i}.name`,a.name)}
-      ${fld('الاسم بالإنجليزية',`agents.${i}.nameEn`,a.nameEn)}
-      ${fld('المالك',`agents.${i}.owner`,a.owner)}
-      ${fld('الجهة المستفيدة',`agents.${i}.beneficiary`,a.beneficiary)}
-      ${sel('المرحلة',`agents.${i}.stage`,a.stage,stages)}
-      ${fld('ملاحظة',`agents.${i}.note`,a.note)}
-    </div>`).join('');
-
-  const items=D.checklistItems||[];
-  $('ed-check').innerHTML = '<p class="ed-hint">اضغط أي خانة لتبديلها: — ← ✓ ← ✗</p>' +
-    (D.checklist||[]).map((c,ri)=>`<div class="ed-card"><div class="ed-card-t">${esc(c.agent)}</div>
-      <div class="ed-chk">${(c.v||[]).map((v,ci)=>{
-        const col=v==='✓'?'ok':(v==='✗'?'no':'na');
-        return `<button class="ed-cell ${col}" data-r="${ri}" data-c="${ci}" title="${esc(items[ci]||'')}">
-          <span class="t">${esc((items[ci]||'').slice(0,14))}</span><span class="m">${esc(v)}</span></button>`;
-      }).join('')}</div></div>`).join('');
-
-  $('ed-lists').innerHTML = `
-    <p class="ed-hint">المخاطر والأنشطة — عدّل النص أو احذف بندًا.</p>
-    <div class="ed-card"><div class="ed-card-t">المخاطر</div>${
-      (D.risks||[]).map((r,i)=>`<div class="ed-row">
-        <input data-path="risks.${i}.desc" value="${esc(r.desc)}">
-        <select data-path="risks.${i}.priority">${['عالية','متوسطة','منخفضة'].map(o=>`<option${o===r.priority?' selected':''}>${o}</option>`).join('')}</select>
-        <button class="ed-del" data-del="risks" data-i="${i}">✕</button></div>`).join('')}
-      <button class="ed-add" data-add="risks">+ إضافة مخاطرة</button></div>
-    <div class="ed-card"><div class="ed-card-t">الأنشطة المنجزة</div>${
-      (D.done||[]).map((r,i)=>`<div class="ed-row">
-        <input data-path="done.${i}.act" value="${esc(r.act)}">
-        <button class="ed-del" data-del="done" data-i="${i}">✕</button></div>`).join('')}
-      <button class="ed-add" data-add="done">+ إضافة نشاط منجز</button></div>
-    <div class="ed-card"><div class="ed-card-t">الأنشطة المخططة</div>${
-      (D.planned||[]).map((r,i)=>`<div class="ed-row">
-        <input data-path="planned.${i}.act" value="${esc(r.act)}">
-        <input data-path="planned.${i}.date" type="date" value="${esc(r.date)}" style="max-width:140px">
-        <button class="ed-del" data-del="planned" data-i="${i}">✕</button></div>`).join('')}
-      <button class="ed-add" data-add="planned">+ إضافة نشاط مخطط</button></div>`;
-
-  const i=D.info;
-  $('ed-info').innerHTML = '<p class="ed-hint">بيانات الترويسة والجدول الزمني.</p><div class="ed-card">' +
-    fld('اسم المشروع (عربي)','info.projectAr',i.projectAr) +
-    fld('اسم المشروع (إنجليزي)','info.projectEn',i.projectEn) +
-    fld('الرمز','info.code',i.code) +
-    fld('الشركة','info.company',i.company) +
-    fld('مالكا المشروع','info.owners',i.owners) +
-    fld('مدير المشروع','info.pm',i.pm) +
-    fld('أعضاء الفريق','info.members',i.members) +
-    '<div class="ed-2">'+fld('البداية','info.startDate',i.startDate,'date')+fld('النهاية','info.endDate',i.endDate,'date')+'</div>' +
-    fld('المدة','info.duration',i.duration) +
-    fld('المرحلة الحالية','info.currentPhase',i.currentPhase) +
-    '<div class="ed-2">'+fld('الإصدار','info.version',i.version)+fld('آخر تحديث','info.lastUpdate',i.lastUpdate,'date')+'</div></div>';
-
-  $('jsonBox').value = JSON.stringify(D, (k,v)=> k==='_stats'?undefined:v, 2);
-  $('jsonErr').textContent = '';
-}
-
-function setPath(obj, path, val){
-  const parts = path.split('.'); let o = obj;
-  for(let i=0;i<parts.length-1;i++) o = o[parts[i]];
-  const key = parts[parts.length-1];
-  const prev = o[key];
-  o[key] = (typeof prev === 'number' && val!=='' && isFinite(parseFloat(val))) ? parseFloat(val) : val;
-}
-
-function applyEdits(){
-  const active = document.querySelector('.ed-pane.active').id;
-  if(active === 'ed-json'){
-    try{
-      const parsed = JSON.parse($('jsonBox').value);
-      D = parsed; $('jsonErr').textContent='';
-    }catch(e){
-      $('jsonErr').textContent = '⚠ JSON غير صالح: '+e.message;
-      showToast('⚠ JSON غير صالح — لم يُطبَّق'); return;
-    }
-  } else {
-    document.querySelectorAll('.ed [data-path]').forEach(el=>{
-      if(el.value !== undefined) setPath(D, el.dataset.path, el.value);
-    });
-  }
-  renderAll();
-  try{
-    const payload = JSON.parse(JSON.stringify(D, (k,v)=>k==='_stats'?undefined:v));
-    payload.dataVersion = EMBEDDED.dataVersion;
-    localStorage.setItem(DRAFT_KEY, JSON.stringify(payload));
-  }catch(e){}
-  buildEditor();
-  setDirty(true);
-  showToast('✓ طُبِّقت التعديلات وحُفظت في هذا المتصفح — اضغط «تصدير الملف» لنشرها', true);
-}
-
-/* Export a ready-to-upload index.html with the current data baked in */
-const DYN_IDS = ['proj-meta','kpiGrid','currentPhaseCard','phaseBars','pipelineMini','pipelineFull',
-  'contractRow','phaseTable','ganttScale','ganttBody','agentKpis','agentCards',
-  'checkHead','checkBody','actSummary','risksList','obsList','roadmapList','roadmapNote',
-  'doneList','plannedList','ed-phases','ed-agents','ed-check','ed-lists','ed-info'];
-
-function exportFile(){
-  const clean = JSON.stringify(D, (k,v)=>k==='_stats'?undefined:v, 2);
-  const saved = {};
-  DYN_IDS.forEach(id=>{ const el=$(id); if(el){ saved[id]=el.innerHTML; el.innerHTML=''; } });
-  const jb = $('jsonBox'); const jbv = jb.value; jb.value='';
-  const openEd = $('ed').classList.contains('open');
-  $('ed').classList.remove('open'); $('edBack').classList.remove('show');
-
-  let html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-
-  DYN_IDS.forEach(id=>{ const el=$(id); if(el && saved[id]!==undefined) el.innerHTML=saved[id]; });
-  jb.value = jbv;
-  if(openEd){ $('ed').classList.add('open'); $('edBack').classList.add('show'); }
-
-  // swap the embedded data block for the current data
-  const re = /(<script type="application\/json" id="DASH_DATA">)[\s\S]*?(<\/script>)/;
-  if(re.test(html)) html = html.replace(re, (m,a,b)=>a+'\n'+clean+'\n'+b);
-  else { showToast('⚠ تعذّر العثور على كتلة البيانات'); return; }
-
-  const blob = new Blob([html], {type:'text/html;charset=utf-8'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob); a.download = 'index.html';
-  document.body.appendChild(a); a.click(); a.remove();
-  setTimeout(()=>URL.revokeObjectURL(a.href), 4000);
-  setDirty(false);
-  showToast('✓ تم تنزيل index.html — ارفعه إلى GitHub لنشر التحديث', true);
-}
 
 /* ════════════════════════════════════════════════════════
    INIT
@@ -1774,70 +1564,10 @@ $('tabs').addEventListener('click', e=>{
   b.classList.add('active'); $('page-'+b.dataset.tab).classList.add('active');
 });
 
-$('edTabs').addEventListener('click', e=>{
-  const b=e.target.closest('button'); if(!b) return;
-  document.querySelectorAll('#edTabs button').forEach(x=>x.classList.remove('active'));
-  document.querySelectorAll('.ed-pane').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active'); $('ed-'+b.dataset.ed).classList.add('active');
-});
-
-$('ed').addEventListener('click', e=>{
-  const cell=e.target.closest('.ed-cell');
-  if(cell){
-    const r=+cell.dataset.r, c=+cell.dataset.c;
-    const cycle={'—':'✓','✓':'✗','✗':'—'};
-    D.checklist[r].v[c] = cycle[D.checklist[r].v[c]] || '✓';
-    const v=D.checklist[r].v[c];
-    cell.className='ed-cell '+(v==='✓'?'ok':(v==='✗'?'no':'na'));
-    cell.querySelector('.m').textContent=v;
-    return;
-  }
-  const del=e.target.closest('.ed-del');
-  if(del){ D[del.dataset.del].splice(+del.dataset.i,1);
-    D[del.dataset.del].forEach((x,k)=>x.n=k+1); buildEditor(); return; }
-  const add=e.target.closest('.ed-add');
-  if(add){
-    const k=add.dataset.add;
-    const blank={risks:{desc:'مخاطرة جديدة',impact:'متوسط',priority:'متوسطة',owner:'',plan:'',status:'نشط'},
-                 done:{act:'نشاط منجز جديد',status:'مكتمل'},
-                 planned:{act:'نشاط مخطط جديد',owner:'',date:'',status:'مخطط'},
-                 }[k];
-    D[k].push({n:D[k].length+1, ...blank}); buildEditor(); return;
-  }
-});
-
-$('editBtn').addEventListener('click', OPEN);
-$('edClose').addEventListener('click', CLOSE);
-$('edBack').addEventListener('click', CLOSE);
-$('edApply').addEventListener('click', applyEdits);
-$('edExport').addEventListener('click', exportFile);
-$('edReset').addEventListener('click', ()=>{
-  D = deepCopy(EMBEDDED); try{ localStorage.removeItem(DRAFT_KEY); }catch(e){}
-  renderAll(); buildEditor(); setDirty(false);
-  showToast('↺ تمت استعادة البيانات الأصلية المضمَّنة في الملف', true);
-});
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') CLOSE(); });
-
 /* Boot */
 const EMBEDDED = JSON.parse($('DASH_DATA').textContent);
-let boot = deepCopy(EMBEDDED), hadDraft = false, staleDraft = false;
-try{
-  const raw = localStorage.getItem(DRAFT_KEY);
-  if(raw){
-    const draft = JSON.parse(raw);
-    if(draft && draft.dataVersion === EMBEDDED.dataVersion){
-      boot = draft; hadDraft = true;                 // same file version — keep the local edits
-    }else{
-      localStorage.removeItem(DRAFT_KEY);            // newer file wins; bin the old draft
-      try{ localStorage.removeItem(CACHE_KEY); }catch(e){}
-      staleDraft = true;
-    }
-  }
-}catch(e){ try{ localStorage.removeItem(DRAFT_KEY); }catch(_){} }
-D = boot;
+D = deepCopy(EMBEDDED);
 renderAll();
-if(hadDraft) setDirty(true);
-if(staleDraft) setTimeout(()=>showToast('↻ حُذفت نسخة محلية قديمة — تُعرض الآن بيانات الملف الحالي', true), 400);
 setSource(SHEET_ID ? 'sheet' : 'local', '');
 if($('refreshBtn')) $('refreshBtn').addEventListener('click', ()=>loadFromSheet(true));
 if(SHEET_ID){
@@ -1847,9 +1577,6 @@ if(SHEET_ID){
 }else{
   const rb=$('refreshBtn'); if(rb) rb.style.display='none';
 }
-window.addEventListener('beforeunload', e=>{
-  if(document.body.classList.contains('dirty')){ e.preventDefault(); e.returnValue=''; }
-});
 
 </script>
 </body>
