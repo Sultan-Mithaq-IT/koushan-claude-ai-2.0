@@ -828,7 +828,7 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
       "n": 7,
       "desc": "عدم توفّر أداة تُمكّن Claude من الإرسال عبر Outlook مباشرة",
       "impact": "متوسط",
-      "priority": "عالية",
+      "priority": "متوسطة",
       "owner": "",
       "plan": "حل بديل عبر Chrome و Outlook، ومتابعة توفّر تكامل مباشر",
       "status": "قيد المراجعة"
@@ -1043,7 +1043,7 @@ function computeStats(D){
   });
   const scored = readiness.filter(r=>r.assessed>0);
   const scoredN = scored.length;
-  const avgReady = scored.length ? scored.reduce((s,r)=>s+r.pct,0)/scored.length : null;
+  const avgReady = readiness.length ? readiness.reduce((s,r)=>s+r.pct,0)/readiness.length : null;;
   const fullyReadyN = readiness.filter(r=>r.assessed>0 && r.pct===100).length;
 
   const active = ag.filter(a=>pctNum(a.pct)>0).length;
