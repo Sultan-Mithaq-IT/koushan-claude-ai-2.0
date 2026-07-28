@@ -1043,7 +1043,7 @@ function computeStats(D){
   });
   const scored = readiness.filter(r=>r.assessed>0);
   const scoredN = scored.length;
-  const avgReady = readiness.length ? (fullyReadyN/readiness.length*100) : null;;
+  const avgReady = scored.length ? scored.reduce((s,r)=>s+r.pct,0)/scored.length : null;
   const fullyReadyN = readiness.filter(r=>r.assessed>0 && r.pct===100).length;
 
   const active = ag.filter(a=>pctNum(a.pct)>0).length;
