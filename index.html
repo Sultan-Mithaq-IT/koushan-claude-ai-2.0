@@ -1043,14 +1043,16 @@ function computeStats(D){
   });
   const scored = readiness.filter(r=>r.assessed>0);
   const scoredN = scored.length;
-  const avgReady = scored.length ? scored.reduce((s,r)=>s+r.pct,0)/scored.length : null;
-  const fullyReadyN = readiness.filter(r=>r.assessed>0 && r.pct===100).length;
+  const avgReady = readiness.length ? readiness.reduce((s,r)=>s+r.pct,0)/readiness.length : null;;
+  const fullyReadyN  = readiness.filter(r=>r.assessed>0 && r.pct===100).length;
+  const partialN     = readiness.filter(r=>r.assessed>0 && r.pct<100).length;
+  const unassessedN  = readiness.filter(r=>r.assessed===0).length;
 
   const active = ag.filter(a=>pctNum(a.pct)>0).length;
   const tasksDone = tasksDoneN;
 
   return {
-    overall, totDays, stageCount, readiness, avgReady, fullyReadyN,
+    overall, totDays, stageCount, readiness, avgReady, fullyReadyN, partialN, unassessedN,
     agentsTotal: ag.length, agentsActive: active,
     agentsLaunched: ag.filter(a=>String(a.stage||'').includes('مُعتمد')).length,
     agentsNotStarted: ag.filter(a=>pctNum(a.pct)===0).length,
@@ -1116,10 +1118,11 @@ function renderKPIs(){
       <div class="sub">النماذج الأولية الثلاثة</div>
     </div>
     <div class="kpi amber">
-      <div class="label">متوسط جاهزية الوكلاء <span class="en">Avg Readiness</span></div>
-      <div class="value">${s.avgReady===null?'—':s.avgReady.toFixed(1)+'<small>%</small>'}</div>
-      <div class="sub">${s.avgReady===null?'لم تُقيَّم الجاهزية بعد'
-        : s.fullyReadyN+' من '+(D.checklist||[]).length+' وكلاء جاهزون بالكامل'+(s.blockedItems?' • '+s.blockedItems+' معوّق':'')}</div>
+      <div class="label">الوكلاء الجاهزون <span class="en">Agents Ready</span></div>
+      <div class="value">${s.fullyReadyN}<small>/${(D.checklist||[]).length}</small></div>
+      <div class="sub">${(D.checklist||[]).length===0 ? 'لا توجد قوائم جاهزية'
+        : s.fullyReadyN+' مكتمل • '+s.partialN+' قيد الاستكمال • '+s.unassessedN+' لم يُقيَّم'
+          +(s.blockedItems?' • '+s.blockedItems+' معوّق':'')}</div>
     </div>
     <div class="kpi navy">
       <div class="label">الأنشطة المخططة <span class="en">Planned Activities</span></div>
@@ -1259,7 +1262,7 @@ function renderAgentKpis(){
     <div class="kpi green"><div class="label">قيد الاختبار</div><div class="value">${s.agentsTesting}</div><div class="sub">على بيانات فعلية</div></div>
     <div class="kpi amber"><div class="label">قيد البناء</div><div class="value">${s.stageCount['قيد البناء']||0}</div><div class="sub">جارٍ التطوير</div></div>
     <div class="kpi red"><div class="label">بنود معوّقة</div><div class="value">${s.blockedItems}</div><div class="sub">في قوائم الجاهزية</div></div>
-    <div class="kpi" style="border-top-color:var(--gold)"><div class="label">متوسط الجاهزية</div><div class="value">${s.avgReady===null?'—':s.avgReady.toFixed(1)+'<small>%</small>'}</div><div class="sub">${s.avgReady===null?'لم تُقيَّم بعد':s.fullyReadyN+' من '+(D.checklist||[]).length+' وكلاء جاهزون بالكامل'}</div></div>`;
+    <div class="kpi" style="border-top-color:var(--gold)"><div class="label">الوكلاء الجاهزون</div><div class="value">${s.fullyReadyN}<small>/${(D.checklist||[]).length}</small></div><div class="sub">${s.avgReady===null?'لم تُقيَّم بعد':'متوسط البنود المكتملة '+s.avgReady.toFixed(1)+'%'}</div></div>`;
 }
 
 function renderAgentCards(){
