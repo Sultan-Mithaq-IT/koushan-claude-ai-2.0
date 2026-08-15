@@ -699,10 +699,10 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
       "dept": "",
       "owner": "قتيبة",
       "beneficiary": "كوشان",
-      "stage": "مكتمل — قيد التعديل",
-      "note": "الوكيل يعمل؛ طُلب تعديله بإضافة تتبّع المنافسين.",
+      "stage": "مكتمل",
+      "note": "مكتمل — أُضيف تتبّع المنافسين كما طُلب في اجتماع رقم ٣.",
       "built": "عرض حيّ للنموذج في اجتماع رقم ٣ لقي قبولاً حسناً.",
-      "next": "إضافة تتبّع المنافسين — توسيع معتمد للنطاق بعد المراجعة."
+      "next": ""
     },
     {
       "n": 3,
@@ -760,9 +760,9 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
       "owner": "لم يُسنَد",
       "beneficiary": "كوشان · الموارد البشرية",
       "stage": "",
-      "note": "طلبته إباء طيبة في ١٣ أغسطس ٢٠٢٦. لم تُجمع متطلباته بعد.",
+      "note": "طلبته إباء طيبة في ١٣ أغسطس ٢٠٢٦، وسلّمت تعليماته كاملة في ملف Word (٥٨ بنداً) بتاريخ ١٥ أغسطس. المتطلبات مكتملة ومعتمدة من صاحبة الطلب، ولم يبدأ البناء بعد.",
       "built": "",
-      "next": ""
+      "next": "إسناد مالك، ثم تحديد مصدر بيانات الموظفين والصلاحيات قبل البناء."
     }
   ],
   "checklistItems": [
@@ -1069,7 +1069,7 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
     }
   ],
   "roadmapNote": "المرحلة ٠ ليست مرحلة تمهيدية تنتهي، بل تسري بالتوازي مع جميع المراحل. ولم تُجمع أي احتياجات من الأقسام بعد — فذلك يبدأ في المرحلة ٤ بعد الإعلان المؤسسي.  ومستويات الطرح ١ و٢ و٣ مدمجة ضمن المرحلتين ٤ و٥ أعلاه — يُرجى تأكيد هذا الربط.",
-  "dataVersion": "5dc165759a48"
+  "dataVersion": "aab883b4a114"
 }
 </script>
 
@@ -1127,9 +1127,12 @@ function computeStats(D){
   const scored = readiness.filter(r=>r.assessed>0);
   const scoredN = scored.length;
   const avgReady = readiness.length ? readiness.reduce((s,r)=>s+r.pct,0)/readiness.length : null;;
-  const fullyReadyN  = readiness.filter(r=>r.assessed>0 && r.pct===100).length;
-  const partialN     = readiness.filter(r=>r.assessed>0 && r.pct<100).length;
-  const unassessedN  = readiness.filter(r=>r.assessed===0).length;
+  const DONE_STAGE = /مُعتمد|مُطلق|^مكتمل/;
+  const stageOf = name => (ag.find(a=>a.name===name)||{}).stage || '';
+  const isReady = r => (r.assessed>0 && r.pct===100) || DONE_STAGE.test(stageOf(r.agent).trim());
+  const fullyReadyN  = readiness.filter(isReady).length;
+  const partialN     = readiness.filter(r=>!isReady(r) && r.assessed>0).length;
+  const unassessedN  = readiness.filter(r=>!isReady(r) && r.assessed===0).length;
 
   const active = ag.filter(a=>pctNum(a.pct)>0).length;
   const tasksDone = tasksDoneN;
