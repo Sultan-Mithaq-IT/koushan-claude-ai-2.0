@@ -491,7 +491,7 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
     </div>
 
     <div class="grid-2" style="margin-top:14px">
-      <div class="card">
+      <div class="card" id="durCard">
         <h3>مدة كل مرحلة <span class="en">Phase Duration (days)</span></h3>
         <div style="height:240px"><canvas id="phaseDurChart"></canvas></div>
       </div>
@@ -603,67 +603,58 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
   },
   "phases": [
     {
-      "n": "M1",
-      "name": "اعتماد الانطلاق وبناء المشروع",
-      "start": "2026-07-06",
-      "end": "2026-07-06",
-      "days": 1,
+      "n": "٠",
+      "name": "الأساسات — رفع معرفة الفريق بالذكاء الاصطناعي والوكلاء",
+      "start": "",
+      "end": "",
+      "days": "",
       "status": "قيد التنفيذ",
-      "notes": ""
+      "notes": "مستمرة بالتوازي مع المراحل كلها — لا بوابة خروج"
     },
     {
-      "n": "M2",
-      "name": "إنهاء الاكتشاف والتحليل",
-      "start": "2026-07-07",
-      "end": "2026-07-17",
-      "days": 11,
+      "n": "١",
+      "name": "الجلسات الأسبوعية — ما جُرّب، وتصنيف الأفكار، وقائمة الأولويات",
+      "start": "",
+      "end": "",
+      "days": "",
       "status": "قيد التنفيذ",
-      "notes": ""
+      "notes": "متكرّرة — لا بوابة خروج"
     },
     {
-      "n": "M3",
-      "name": "اعتماد حالات الاستخدام والأولويات",
-      "start": "2026-07-20",
-      "end": "2026-07-31",
-      "days": 12,
-      "status": "لم تبدأ",
-      "notes": ""
-    },
-    {
-      "n": "M4",
-      "name": "اعتماد تصميم الوكلاء",
-      "start": "2026-08-03",
-      "end": "2026-08-14",
-      "days": 12,
-      "status": "لم تبدأ",
-      "notes": ""
-    },
-    {
-      "n": "M5",
-      "name": "إنجاز بناء النسخة التجريبية",
-      "start": "2026-08-17",
+      "n": "٢",
+      "name": "بناء النماذج الأولية — ثلاثة نماذج، لكل عضو نموذج",
+      "start": "",
       "end": "2026-09-04",
-      "days": 19,
-      "status": "لم تبدأ",
-      "notes": ""
+      "days": "",
+      "status": "قيد التنفيذ",
+      "notes": "بوابة الخروج: اعتماد تصميم الوكلاء ثم إنجاز البناء — من ٣ إلى ٥ وكلاء تشغيلية"
     },
     {
-      "n": "M6",
-      "name": "اجتياز اختبار القبول (UAT)",
-      "start": "2026-09-07",
+      "n": "٣",
+      "name": "الاختبار — التحقق من كل نموذج على بيانات فعلية",
+      "start": "",
       "end": "2026-09-18",
-      "days": 12,
-      "status": "لم تبدأ",
-      "notes": ""
+      "days": "",
+      "status": "قيد التنفيذ",
+      "notes": "بوابة الخروج: اجتياز اختبار القبول — رضا المستخدمين ودقة الإجابات"
     },
     {
-      "n": "M7",
-      "name": "الإطلاق والتدريب والتسليم",
-      "start": "2026-09-21",
-      "end": "2026-09-25",
-      "days": 5,
+      "n": "٤",
+      "name": "الإعلان المؤسسي — مهلة ردّ أسبوعين لاستقبال طلبات الأقسام",
+      "start": "",
+      "end": "",
+      "days": "",
       "status": "لم تبدأ",
-      "notes": ""
+      "notes": "بوابة الخروج: اعتماد حالات الاستخدام والأولويات · التاريخ لم يُحدَّد بعد"
+    },
+    {
+      "n": "٥",
+      "name": "التوسّع والتعميق — تكرار النمط لحالات استخدام إضافية",
+      "start": "",
+      "end": "2026-09-25",
+      "days": "",
+      "status": "لم تبدأ",
+      "notes": "بوابة الخروج: الإطلاق والتدريب والتسليم"
     }
   ],
   "pipeline": [
@@ -719,7 +710,7 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
       "nameEn": "Creative Agent",
       "dept": "",
       "owner": "حارث",
-      "beneficiary": "مدوام",
+      "beneficiary": "ميدوام",
       "stage": "قيد البناء",
       "note": "أوضح حارث في اجتماع رقم ٣ أن للوكيل عدة مراحل وخطوات لم تُنجَز بعد.",
       "built": "عُرض المسار في اجتماع رقم ٣.",
@@ -731,9 +722,45 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
       "nameEn": "Strategic Research & Opportunity Intelligence Agent",
       "dept": "",
       "owner": "إباء طيبة",
-      "beneficiary": "ميثاقنا · CFO & CSO ",
+      "beneficiary": "كوشان · ميثاقنا",
       "stage": "مُعتمد ومُطلق",
-      "note": "CFOطلبته إباء طيبة، وتستخدمه هي والـ ",
+      "note": "طلبته إباء طيبة، ويستخدمه الرئيس التنفيذي للشؤون المالية حالياً.",
+      "built": "",
+      "next": ""
+    },
+    {
+      "n": 5,
+      "name": "HospIQ — وكيل الضيافة",
+      "nameEn": "HospIQ — Hospitality Agent",
+      "dept": "",
+      "owner": "لم يُسنَد",
+      "beneficiary": "كوشان · مكتب إدارة المشاريع — الفنادق والعقارات",
+      "stage": "",
+      "note": "طلبه يامن في اجتماع ١٢ أغسطس ٢٠٢٦. نقاط أولية لم تُراجَع معه بعد.",
+      "built": "",
+      "next": ""
+    },
+    {
+      "n": 6,
+      "name": "وكيل مكتب إدارة المشاريع والسكرتارية",
+      "nameEn": "PMO & Secretariat Agent",
+      "dept": "",
+      "owner": "لم يُسنَد",
+      "beneficiary": "كوشان · د. الأفرنجي",
+      "stage": "",
+      "note": "طلبه د. الأفرنجي في اجتماع ١٣ أغسطس ٢٠٢٦. نقاط أولية لم تُراجَع معه بعد.",
+      "built": "",
+      "next": ""
+    },
+    {
+      "n": 7,
+      "name": "وكيل التدريب والموارد البشرية",
+      "nameEn": "HR Training Agent",
+      "dept": "",
+      "owner": "لم يُسنَد",
+      "beneficiary": "كوشان · الموارد البشرية",
+      "stage": "",
+      "note": "طلبته إباء طيبة في ١٣ أغسطس ٢٠٢٦. لم تُجمع متطلباته بعد.",
       "built": "",
       "next": ""
     }
@@ -782,6 +809,39 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
     },
     {
       "agent": "وكيل البحث الاستراتيجي واستشراف الفرص",
+      "v": [
+        "—",
+        "—",
+        "—",
+        "—",
+        "—",
+        "—"
+      ]
+    },
+    {
+      "agent": "HospIQ — وكيل الضيافة",
+      "v": [
+        "—",
+        "—",
+        "—",
+        "—",
+        "—",
+        "—"
+      ]
+    },
+    {
+      "agent": "وكيل مكتب إدارة المشاريع والسكرتارية",
+      "v": [
+        "—",
+        "—",
+        "—",
+        "—",
+        "—",
+        "—"
+      ]
+    },
+    {
+      "agent": "وكيل التدريب والموارد البشرية",
       "v": [
         "—",
         "—",
@@ -1009,7 +1069,7 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
     }
   ],
   "roadmapNote": "المرحلة ٠ ليست مرحلة تمهيدية تنتهي، بل تسري بالتوازي مع جميع المراحل. ولم تُجمع أي احتياجات من الأقسام بعد — فذلك يبدأ في المرحلة ٤ بعد الإعلان المؤسسي.  ومستويات الطرح ١ و٢ و٣ مدمجة ضمن المرحلتين ٤ و٥ أعلاه — يُرجى تأكيد هذا الربط.",
-  "dataVersion": "353b2122f67e"
+  "dataVersion": "5dc165759a48"
 }
 </script>
 
@@ -1138,7 +1198,7 @@ function renderKPIs(){
     <div class="kpi navy">
       <div class="label">الوكلاء في النطاق <span class="en">Agents in Scope</span></div>
       <div class="value">${s.agentsTotal}</div>
-      <div class="sub">ثلاثة نماذج أولية · وكيل مُطلق</div>
+      <div class="sub">${s.agentsTotal - 3} قائمة · 3 طلبات جديدة</div>
     </div>
     <div class="kpi amber">
       <div class="label">الوكلاء الجاهزون <span class="en">Agents Ready</span></div>
@@ -1241,7 +1301,7 @@ function renderPhasesTable(){
       <td><b style="color:var(--navy)">${esc(p.name)}</b></td>
       <td class="en">${fmtDate(p.start)}</td>
       <td class="en">${fmtDate(p.end)}</td>
-      <td>${p.days||'—'} يوم</td>
+      <td>${p.days?esc(p.days)+' يوم':'—'}</td>
       <td>${esc(p.status||'—')}</td>
       <td style="text-align:center">${ragDot(rag)}</td>
       <td style="font-size:11px;color:var(--muted)">${esc(p.notes||'')}</td>
@@ -1264,7 +1324,16 @@ function renderGantt(){
 
   $('ganttBody').innerHTML = ph.map(p=>{
     const ps=new Date(p.start).getTime(), pe=new Date(p.end).getTime();
-    if(isNaN(ps)||isNaN(pe)) return '';
+    if(isNaN(pe)) return '';
+    if(isNaN(ps)){                       // gate date only — no invented duration
+      const at=((pe-start)/total)*100;
+      const tShowM = (today>=start&&today<=end) ? `<div class="today-line" style="right:${((today-start)/total)*100}%"></div>` : '';
+      return `<div class="gantt-row">
+        <div class="ttl">${esc(p.n)} · ${esc(p.name)}<small>${fmtDate(p.end)}</small></div>
+        <div class="gantt-track">
+          <div class="gantt-bar ${deriveRag(p.status,p.pct)}" style="right:calc(${at}% - 7px);width:14px;border-radius:3px;transform:rotate(45deg)" title="بوابة الخروج"></div>${tShowM}
+        </div></div>`;
+    }
     const left=((ps-start)/total)*100, width=Math.max(((pe-ps)/total)*100,2);
     const tShow = (today>=start&&today<=end) ? `<div class="today-line" style="right:${((today-start)/total)*100}%"></div>` : '';
     return `<div class="gantt-row">
@@ -1294,6 +1363,7 @@ function renderAgentCards(){
     const st = String(a.stage||'');
     const state = st.includes('مُعتمد')?'approved':(st?'received':'');
     const cls   = st.includes('مُعتمد')?'green':(st.includes('اختبار')?'amber':(st?'amber':'grey'));
+    const stLabel = st || 'طلب جديد — لم يبدأ';
     const rd = rmap[a.name];
     return `<div class="comp-card ${state}">
       <h4>${a.n}. ${esc(a.name)}</h4>
@@ -1302,7 +1372,7 @@ function renderAgentCards(){
       <div class="rep" style="margin-top:3px">🏢 ${esc(a.beneficiary||a.dept||'—')}</div>
       <div class="pct-box">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-          <span class="badge ${cls}">${esc(a.stage||'لم تُحدَّد المرحلة')}</span>
+          <span class="badge ${cls}">${esc(stLabel)}</span>
         </div>
         ${rd? `<div style="font-size:10.5px;color:var(--muted);margin-top:5px">${
           rd.assessed===0 ? 'الجاهزية: <b style="color:var(--muted)">لم تُقيَّم</b>'
@@ -1418,7 +1488,11 @@ function renderCharts(){
   });
 
   destroyChart('phaseDurChart');
-  CHARTS.phaseDurChart = new Chart($('phaseDurChart'),{
+  // phases carry gate dates, not durations — draw nothing rather than a row of zeros
+  const anyDays = (D.phases||[]).some(p=>Number(p.days)>0);
+  const durCard = document.getElementById('durCard');
+  if(durCard) durCard.style.display = anyDays ? '' : 'none';
+  if(anyDays) CHARTS.phaseDurChart = new Chart($('phaseDurChart'),{
     type:'bar',
     data:{labels:D.phases.map(p=>p.name),
       datasets:[{label:'المدة (يوم)',data:D.phases.map(p=>Number(p.days)||0),
