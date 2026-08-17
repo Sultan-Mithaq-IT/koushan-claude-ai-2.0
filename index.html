@@ -421,13 +421,19 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
 
     <div class="grid-3" style="margin-top:14px">
       <div class="card">
-        <h3>التقدم الإجمالي للمشروع <span class="en">Overall Project Progress</span></h3>
+        <h3>تقدّم التسليم <span class="en">Delivery Progress</span></h3>
         <div class="gauge-wrap">
           <canvas id="gaugeOverall" width="280" height="200"></canvas>
           <div class="gauge-value">
             <div class="big" id="gaugeBig">—</div>
-            <div class="lbl">مراحل مكتملة من ٧</div>
+            <div class="lbl" id="gaugeLbl">من حالة الوكلاء</div>
           </div>
+        </div>
+        <div style="margin-top:10px;padding-top:9px;border-top:1px solid var(--line);
+             font-size:10.5px;color:var(--muted);line-height:1.75">
+          <b style="color:var(--navy)">كيف يُحسب؟</b> وزن كل وكيل بحسب مرحلته:
+          قيد البناء ٣٠٪ · قيد الاختبار ٦٠٪ · مكتمل ٧٥٪ · مكتمل — قيد التعديل ٨٥٪ · مُعتمد ومُطلق ١٠٠٪ ·
+          الطلب الذي لم يبدأ صفر. والأوزان طريقة عرض متفق عليها، لا قياساً.
         </div>
       </div>
       <div class="card">
@@ -603,6 +609,15 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
   },
   "phases": [
     {
+      "n": "—",
+      "name": "اعتماد الميثاق — مراجعة الميثاق من الراعي التنفيذي وقائد الفريق واعتماده",
+      "start": "",
+      "end": "",
+      "days": "",
+      "status": "قيد التنفيذ",
+      "notes": "بوابة حوكمة تسبق المراحل ولا تحمل رقم مرحلة · بوابة الخروج: توقيع الاعتماد في القسم ١٢ من الميثاق · التاريخ لم يُحدَّد"
+    },
+    {
       "n": "٠",
       "name": "الأساسات — رفع معرفة الفريق بالذكاء الاصطناعي والوكلاء",
       "start": "",
@@ -687,7 +702,7 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
       "dept": "",
       "owner": "سلطان",
       "beneficiary": "كوشان ولجنة المراجعة الداخلية بميثاقنا",
-      "stage": "قيد البناء",
+      "stage": "قيد الاختبار",
       "note": "بدأ الاختبار على بيانات فعلية. تشارك أرجوان الزمزمي في التحقق.",
       "built": "الخطوة ١: صياغة محاضر الاجتماعات. الخطوة ٢: تتبّع القرارات والمهام والمتابعات — غير مكتملة، إذ لا تتوفّر حالياً أداة تُمكّن Claude من الإرسال عبر Outlook مباشرة.",
       "next": "إدخال المذكرات الصوتية (عربي/إنجليزي)، واعتماد قالب إطار الخطوط الثلاثة، ومقارنة مرجعية لأفضل الممارسات في إعداد المحاضر."
@@ -706,15 +721,15 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
     },
     {
       "n": 3,
-      "name": "الوكيل الإبداعي",
-      "nameEn": "Creative Agent",
+      "name": "الوكيل الإبداعي — سعود",
+      "nameEn": "Saud — Creative Intelligence Agent",
       "dept": "",
       "owner": "حارث",
       "beneficiary": "ميدوام",
-      "stage": "قيد البناء",
-      "note": "أوضح حارث في اجتماع رقم ٣ أن للوكيل عدة مراحل وخطوات لم تُنجَز بعد.",
-      "built": "عُرض المسار في اجتماع رقم ٣.",
-      "next": "استكمال المراحل والخطوات المتبقية."
+      "stage": "قيد الاختبار",
+      "note": "سعود — وكيل الذكاء الإبداعي لمِدوام. المرحلتان ١ و٢ مكتملتان ومعتمدتان، والأداة تعمل وتنتج مسودات فعلية؛ لم يُجرَّب على عمل حقيقي بعد.",
+      "built": "اختبار كامل على موجز داخلي حقيقي (غار ثور) أنتج عرضاً من ١٤ شريحة · تحديد صلاحيات سعود ومستويات الإشراف واعتمادها · بناء لوحة عمل تنتج مسودات بالذكاء الاصطناعي في ثلاثة مسارات و١٠ أنواع مهام.",
+      "next": "تحميل قاعدة المعرفة في مساحة العمل المشتركة · تجربة داخلية على أسئلة حقيقية · ثم تجربة على أول طلب عروض حقيقي وأخذ ملاحظات قادة تطوير الأعمال والتقنية والعمليات."
     },
     {
       "n": 4,
@@ -746,23 +761,23 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
       "nameEn": "PMO & Secretariat Agent",
       "dept": "",
       "owner": "سلطان",
-      "beneficiary": "كوشان · د. الأفرنجي",
+      "beneficiary": "كوشان · د. محمد الأفرنجي",
       "stage": "",
-      "note": "طلبه د. الأفرنجي في اجتماع ١٣ أغسطس ٢٠٢٦. نقاط أولية لم تُراجَع معه بعد.",
+      "note": "طلبه د. محمد الأفرنجي في اجتماع ١٣ أغسطس ٢٠٢٦. نقاط أولية لم تُراجَع معه بعد.",
       "built": "",
       "next": ""
     },
     {
       "n": 7,
-      "name": "وكيل التدريب والموارد البشرية",
-      "nameEn": "HR Training Agent",
+      "name": "وكيل التعلّم وبناء القدرات والتدريب",
+      "nameEn": "HR Learning, Capability & Training Agent",
       "dept": "",
       "owner": "سلطان",
       "beneficiary": "كوشان · الموارد البشرية",
-      "stage": "",
-      "note": "طلبته إباء طيبة وسلّمت تعليماته كاملة (٥٨ بنداً) في ١٣ أغسطس ٢٠٢٦. المتطلبات مكتملة ومعتمدة من صاحبة الطلب، ولم يبدأ البناء بعد.",
-      "built": "",
-      "next": "إسناد مالك، ثم تحديد مصدر بيانات الموظفين والصلاحيات قبل البناء."
+      "stage": "مكتمل",
+      "note": "بُني بالكامل على مواصفات إباء طيبة (٥٨ بنداً). إضافة hr-capability.plugin v0.2.0 بسبع مهارات، ودفتر السجلات الخمسة، ومثال عملي كامل، ودليل تشغيل. التجربة لمستخدم واحد (إباء) وبياناتها في OneDrive الخاص بها.",
+      "built": "الملحق البرمجي بسبع مهارات وستة مراجع مشتركة · دفتر Koushan_HR_Capability_Registers.xlsx بـ١٩ قائمة منسدلة و٤٢٦ صيغة · مثال عملي من ٧ صفحات · دليل تشغيل من ٧ خطوات · ثلاث جولات تحقق: تغطية ٥٧ من ٥٨ بنداً، و٢٦ من ٢٦ اختبار صيغة، واختبار اختراق سلوكي أُغلقت ثغراته في الإصدار ٠٫١٫٢.",
+      "next": "تشغيل أول تقييم حقيقي ببيانات إباء · رفع الدفتر إلى مجلدها · تأكيد قائمة الشركات التابعة · حسم سياسة الوصول إلى تقييمات القدرات (قرار موارد بشرية وتقنية معلومات)."
     }
   ],
   "checklistItems": [
@@ -797,7 +812,7 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
       ]
     },
     {
-      "agent": "الوكيل الإبداعي",
+      "agent": "الوكيل الإبداعي — سعود",
       "v": [
         "—",
         "—",
@@ -841,7 +856,7 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
       ]
     },
     {
-      "agent": "وكيل التدريب والموارد البشرية",
+      "agent": "وكيل التعلّم وبناء القدرات والتدريب",
       "v": [
         "—",
         "—",
@@ -1069,7 +1084,7 @@ body.sheetmode .ed-save{background:#eefaf3;border-bottom-color:#bfe6d2;color:#1c
     }
   ],
   "roadmapNote": "المرحلة ٠ ليست مرحلة تمهيدية تنتهي، بل تسري بالتوازي مع جميع المراحل. ولم تُجمع أي احتياجات من الأقسام بعد — فذلك يبدأ في المرحلة ٤ بعد الإعلان المؤسسي.  ومستويات الطرح ١ و٢ و٣ مدمجة ضمن المرحلتين ٤ و٥ أعلاه — يُرجى تأكيد هذا الربط.",
-  "dataVersion": "aa52aaa444ca"
+  "dataVersion": "f94fb048d29f"
 }
 </script>
 
@@ -1108,7 +1123,10 @@ function computeStats(D){
   const totDays = ph.reduce((s,p)=>s+(Number(p.days)||0),0) || 1;
   const tasksDoneN = ph.filter(p=>String(p.status||'').includes('مكتمل')).length;
   const anyStatus  = ph.some(p=>String(p.status||'').trim() !== '');
-  const overall = (ph.length && anyStatus) ? (tasksDoneN/ph.length*100) : null;
+  // phase progress: a started phase is worth half a closed one
+  const PH_W = s => String(s||'').includes('مكتمل') ? 1 : (String(s||'').includes('قيد') ? 0.5 : 0);
+  const phaseProgress = (ph.length && anyStatus)
+    ? ph.reduce((s,p)=>s+PH_W(p.status),0) / ph.length * 100 : null;
 
   const ag = D.agents||[];
   const stageCount = {};
@@ -1134,11 +1152,21 @@ function computeStats(D){
   const partialN     = readiness.filter(r=>!isReady(r) && r.assessed>0).length;
   const unassessedN  = readiness.filter(r=>!isReady(r) && r.assessed===0).length;
 
+  // delivery progress: the project's output is agents, so weight them by stage.
+  // Weights are a stated method, not a measurement — the legend is shown on the card.
+  const STAGE_W = {'قيد البناء':30,'قيد الاختبار':60,'مكتمل':75,'مكتمل — قيد التعديل':85,'مُعتمد ومُطلق':100};
+  const agentPts = ag.map(a=>STAGE_W[String(a.stage||'').trim()] ?? 0);
+  const overall  = ag.length ? agentPts.reduce((s,v)=>s+v,0)/ag.length : null;
+  const launchedN = ag.filter(a=>/مُعتمد|مُطلق/.test(a.stage||'')).length;
+  const builtN    = ag.filter(a=>/^مكتمل/.test(String(a.stage||'').trim())).length;
+  const notStarted= ag.filter(a=>!String(a.stage||'').trim()).length;
+
   const active = ag.filter(a=>pctNum(a.pct)>0).length;
   const tasksDone = tasksDoneN;
 
   return {
-    overall, totDays, stageCount, readiness, avgReady, fullyReadyN, partialN, unassessedN,
+    overall, phaseProgress, launchedN, builtN, notStarted,
+    totDays, stageCount, readiness, avgReady, fullyReadyN, partialN, unassessedN,
     agentsTotal: ag.length, agentsActive: active,
     agentsLaunched: ag.filter(a=>String(a.stage||'').includes('مُعتمد')).length,
     agentsNotStarted: ag.filter(a=>pctNum(a.pct)===0).length,
@@ -1189,19 +1217,19 @@ function renderKPIs(){
   const s = D._stats;
   $('kpiGrid').innerHTML = `
     <div class="kpi amber">
-      <div class="label">إجمالي التقدم <span class="en">Overall Progress</span></div>
-      <div class="value">${s.overall===null?'—':s.overall.toFixed(1)+'<small>%</small>'}</div>
-      <div class="sub">${s.overall===null?'لم تُحدَّد حالات المراحل بعد':s.tasksDone+' من '+D.phases.length+' مراحل مكتملة'}</div>
+      <div class="label">تقدّم التسليم <span class="en">Delivery Progress</span></div>
+      <div class="value">${s.overall===null?'—':s.overall.toFixed(0)+'<small>%</small>'}</div>
+      <div class="sub">${s.launchedN} مُطلق · ${s.builtN} مبني · ${s.agentsTotal-s.launchedN-s.builtN-s.notStarted} قيد العمل · ${s.notStarted} لم يبدأ</div>
     </div>
     <div class="kpi green">
-      <div class="label">المراحل المكتملة <span class="en">Phases Complete</span></div>
-      <div class="value">${s.tasksDone}<small>/${D.phases.length}</small></div>
-      <div class="sub">من M1 إلى M${D.phases.length}</div>
+      <div class="label">تقدّم المراحل <span class="en">Phase Progress</span></div>
+      <div class="value">${s.phaseProgress===null?'—':s.phaseProgress.toFixed(0)+'<small>%</small>'}</div>
+      <div class="sub">${s.tasksDone} بوابة مغلقة من ${D.phases.length} · المرحلة الجارية تُحتسب نصف بوابة</div>
     </div>
     <div class="kpi navy">
       <div class="label">الوكلاء في النطاق <span class="en">Agents in Scope</span></div>
       <div class="value">${s.agentsTotal}</div>
-      <div class="sub">${s.agentsTotal - 3} قائمة · 3 طلبات جديدة</div>
+      <div class="sub">${s.agentsTotal-s.notStarted} قيد العمل أو أُنجزت · ${s.notStarted} طلبات لم تبدأ</div>
     </div>
     <div class="kpi amber">
       <div class="label">الوكلاء الجاهزون <span class="en">Agents Ready</span></div>
@@ -1220,7 +1248,7 @@ function renderKPIs(){
       <div class="value">${(D.risks||[]).length}</div>
       <div class="sub">${s.risksHigh? s.risksHigh+' عالية الأولوية' : 'لم تُصنَّف بعد'}</div>
     </div>`;
-  $('gaugeBig').textContent = s.overall===null ? '—' : s.overall.toFixed(1)+'%';
+  $('gaugeBig').textContent = s.overall===null ? '—' : s.overall.toFixed(0)+'%';
 }
 
 function renderCurrentPhase(){
